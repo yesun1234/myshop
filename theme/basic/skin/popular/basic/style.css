@@ -1,13 +1,17 @@
 @charset "utf-8";
 
 /* 인기검색어 */
-#popular {position:relative;margin:15px 0 0}
-#popular h2 {position:absolute;font-size:0;line-height:0;overflow:hidden}
-#popular .popular_inner {width:400px;height:20px;overflow:hidden}
-#popular ul {padding:0;margin:0}
+#popular {position:relative;margin:35px 0 0;display: flex;align-items: flex-start;justify-content: space-between;}
+#popular div{width: 20rem;}
+#popular h2{font-size: 1.6rem;font-weight: 500;}
+#popular .best_keyword_ul{display: grid;gap: 0.5rem;margin-top: 1.1rem;}
+#popular .best_keyword a{color: #000;}
+#popular li{font-size: 1.5rem;}
+#popular .keyword_num{color: var(--bg-color);margin-right: 14px;display: inline-block;font-weight: 500;}
+#popular .popular_inner {overflow:hidden}
 #popular ul:after {display:block;visibility:hidden;clear:both;content:""}
-#popular li {float:left;width:auto !important;height:18px;line-height:18px;padding-right:20px}
-#popular li a {color:#8d8c8c}
+/* #popular li {float:left;width:auto !important;height:18px;line-height:18px;padding-right:20px} */
+#popular li a {color:#8d8c8c;font-size: 1.5rem;}
 #popular li:first-child {border-left:0}
 #popular li a:hover {text-decoration:underline}
 

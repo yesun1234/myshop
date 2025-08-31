@@ -126,51 +126,7 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
                             <path id="vector" d="M28.5566 28.0002L22.7566 22.2002" stroke="#1A1A1A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path>
                         </g>
                     </svg>
-                    <div class="hd_sch_wr" style="display:none;">
-                    <fieldset id="hd_sch">
-                        <legend>사이트 내 전체검색</legend>
-                        <form name="fsearchbox" method="get" action="<?php echo G5_BBS_URL ?>/search.php" onsubmit="return fsearchbox_submit(this);">
-                        <input type="hidden" name="sfl" value="wr_subject||wr_content">
-                        <input type="hidden" name="sop" value="and">
-                        <label for="sch_stx" class="sound_only">검색어 필수</label>
-                        <input type="text" name="stx" id="sch_stx" maxlength="20" placeholder="검색어를 입력해주세요">
-                        <button type="submit" id="sch_submit" value="검색"><i class="fa fa-search" aria-hidden="true"></i><span class="sound_only">검색</span></button>
-                        </form>
-
-                        <script>
-                        function fsearchbox_submit(f)
-                        {
-                            var stx = f.stx.value.trim();
-                            if (stx.length < 2) {
-                                alert("검색어는 두글자 이상 입력하십시오.");
-                                f.stx.select();
-                                f.stx.focus();
-                                return false;
-                            }
-
-                            // 검색에 많은 부하가 걸리는 경우 이 주석을 제거하세요.
-                            var cnt = 0;
-                            for (var i = 0; i < stx.length; i++) {
-                                if (stx.charAt(i) == ' ')
-                                    cnt++;
-                            }
-
-                            if (cnt > 1) {
-                                alert("빠른 검색을 위하여 검색어에 공백은 한개만 입력할 수 있습니다.");
-                                f.stx.select();
-                                f.stx.focus();
-                                return false;
-                            }
-                            f.stx.value = stx;
-
-                            return true;
-                        }
-                        </script>
-
-                    </fieldset>
-                        
-                    <?php echo popular('theme/basic'); // 인기검색어, 테마의 스킨을 사용하려면 스킨을 theme/basic 과 같이 지정  ?>
-                </div>
+                    
                 </li>
 	            
 	            <li class="gnb_1dli"><a href="<?php echo G5_SHOP_URL ?>/">
@@ -210,6 +166,66 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
                 </a></li>
 	        </ul>
 		</div>
+    </div>
+    
+
+    <div class="hd_sch_wr">
+        <button class="ham gnb_menu_close_btn seach_close_btn">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="close">
+                    <mask id="mask0_1117_17928" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-3" y="-3" width="46" height="46">
+                        <rect id="Bounding box" height="40" width="40" fill="#000" stroke="#000" stroke-width="5" ></rect>
+                    </mask>
+                </g>
+                <g mask="url(#mask0_1117_17928)">
+                    <path id="close_2" d="M10.6664 31.0893L8.91016 29.3331L18.2435 19.9997L8.91016 10.6664L10.6664 8.91016L19.9997 18.2435L29.3331 8.91016L31.0893 10.6664L21.756 19.9997L31.0893 29.3331L29.3331 31.0893L19.9997 21.756L10.6664 31.0893Z" fill="#ffffff" stroke="#ffffff" stroke-width="5"></path>
+                </g>
+            </svg>
+        </button>
+        <fieldset id="hd_sch">
+            <legend>사이트 내 전체검색</legend>
+            <form name="fsearchbox" method="get" action="<?php echo G5_BBS_URL ?>/search.php" onsubmit="return fsearchbox_submit(this);">
+                <input type="hidden" name="sfl" value="wr_subject||wr_content">
+                <input type="hidden" name="sop" value="and">
+                <label for="sch_stx" class="sound_only">검색어 필수</label>
+                <input type="text" name="stx" id="sch_stx" maxlength="20" placeholder="Search">
+                <button type="submit" id="sch_submit" value="검색"><i class="fa fa-search" aria-hidden="true"></i><span class="sound_only">검색</span></button>
+            </form>
+
+            <script>
+                function fsearchbox_submit(f)
+                    {
+                        var stx = f.stx.value.trim();
+                            if (stx.length < 2) {
+                                alert("검색어는 두글자 이상 입력하십시오.");
+                                f.stx.select();
+                                f.stx.focus();
+                                return false;
+                        }
+
+                            // 검색에 많은 부하가 걸리는 경우 이 주석을 제거하세요.
+                        var cnt = 0;
+                        for (var i = 0; i < stx.length; i++) {
+                            if (stx.charAt(i) == ' ')
+                                cnt++;
+                        }
+
+                        if (cnt > 1) {
+                        alert("빠른 검색을 위하여 검색어에 공백은 한개만 입력할 수 있습니다.");
+                        f.stx.select();
+                        f.stx.focus();
+                        return false;
+                    }
+                    f.stx.value = stx;
+
+                    return true;
+                }
+            </script>
+
+        </fieldset>
+            
+            <?php echo popular('theme/basic'); // 인기검색어, 테마의 스킨을 사용하려면 스킨을 theme/basic 과 같이 지정  ?>
+            
     </div>
     <div id="gnb_all">
         <!-- <h2>전체메뉴</h2> -->
@@ -336,24 +352,42 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
         let $li = $(this).closest(".gnb_1dli");
 
         if($li.hasClass("open")) {
-            // 이미 열려있으면 닫기
             $li.removeClass("open");
         } else {
-            // 다른 li 닫고 내가 누른 것만 열기
             $(".gnb_1dli").removeClass("open");
             $li.addClass("open");
         }
     });
     
-    // 마우스 올리면 active 붙임
-    $('#hd_qnb .gnb_1dli').mouseenter(function() {
-        $('#hd_qnb .gnb_1dli').removeClass('active'); // 다른 li 제거
-        $(this).addClass('active'); // 현재 li만 active
+        $('#hd_qnb .gnb_1dli').mouseenter(function() {
+            $('#hd_qnb .gnb_1dli').removeClass('active');
+            $(this).addClass('active'); 
+        });
+
+        $('#hd_qnb').mouseleave(function(){
+            $('#hd_qnb .gnb_1dli').removeClass('active');
+        });
+
+        $("#searchIcon").click(function(e){
+        e.preventDefault();
+        $("body").toggleClass("expand2");
+        $(this).toggleClass("active");
     });
 
-    // 하위 메뉴에서 마우스 떠나면 active 제거
-    $('#hd_qnb .gnb_1dli .gnb_2dul').mouseleave(function(){
-        $(this).closest('.gnb_1dli').removeClass('active');
+    // 검색 닫기 버튼 클릭 시 닫힘
+    $(".seach_close_btn").click(function(e){
+        e.preventDefault();
+        $("body").removeClass("expand2");
+        $("#searchIcon").removeClass("active");
+    });
+
+    // body 아무 데나 클릭하면 닫힘 (단, 검색창/아이콘 제외)
+    $(document).click(function(e){
+        if (!$(e.target).closest('#searchIcon, .hd_sch_wr').length) {
+            $("body").removeClass("expand2");
+            $("#searchIcon").removeClass("active");
+        }
+    
     });
     });
 

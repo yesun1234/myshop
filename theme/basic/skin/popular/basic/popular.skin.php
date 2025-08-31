@@ -9,8 +9,28 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_JS_URL.'/owlcarousel/owl.carou
 
 <!-- 인기검색어 시작 { -->
 <section id="popular">
-    <h2>인기검색어</h2>
+    <div class="best_keyword">
+    <h2 class="keyword_tit">Best Keyword</h2>
+        <ul class="best_keyword_ul">
+            <li>
+                <a href=""><span class="keyword_num">01</span>텀블러</a>
+            </li>
+            <li>
+                <a href=""><span class="keyword_num">02</span>양산</a>
+            </li>
+            <li>
+                <a href=""><span class="keyword_num">03</span>텀꾸</a>
+            </li>
+            <li>
+                <a href=""><span class="keyword_num">04</span>런치박스</a>
+            </li>
+            <li>
+                <a href=""><span class="keyword_num">05</span>파우치</a>
+            </li>
+        </ul>
+    </div>
     <div class="popular_inner">
+        <h2>Recent Searches</h2>
 	    <ul>
 	    <?php
 	    if( isset($list) && is_array($list) ){

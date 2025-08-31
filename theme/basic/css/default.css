@@ -94,11 +94,19 @@ border:1px solid #558ab7 !important;
 #logo {position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);}
 #logo a{font-size: 3rem;font-weight: 700;color: #fff;}
 
-.hd_sch_wr {float:left;padding:30px 0;width:445px;margin-left:65px}
+#searchIcon{cursor: pointer;}
+.hd_sch_wr svg path{fill: #000;stroke: #000;}
+.hd_sch_wr .gnb_menu_close_btn{float: none;justify-self: right;display: block;}
+.seach_close_btn:hover svg path{stroke: var(--bg-color) !important;}
+.hd_sch_wr form{width: 100%;display: flex;justify-content: center;margin: 30px 0 30px;}
+body.expand2 .hd_sch_wr{top: 0;}
+.hd_sch_wr {padding:30px 51px;width:100vw;position: absolute;top: -645px;left: 0;background: #fff;transition: top 726ms cubic-bezier(0.4,0.9,0.3,1);z-index: 99999;height: 645px;}
 #hd_sch h3 {position:absolute;font-size:0;line-height:0;overflow:hidden}
 #hd_sch {border-radius:30px;overflow:hidden}
-#hd_sch #sch_stx {float:left;width:385px;height:45px;padding-left:10px;border-radius:30px 0 0 30px;background:#2c2c2c;border:0;border-right:0;font-size:1.25em;color:#fff}
-#hd_sch #sch_submit {float:left;width:60px;height:45px;border:0;background:#2c2c2c;color:#fff;border-radius:0 30px 30px 0;cursor:pointer;font-size:16px}
+#hd_sch #sch_stx {float:left;width:100%;border-radius:60px 0 0 60px;background:var(--bg-color);border:0;border-right:0;font-size:3.25em;color:#fff;line-height: 1;padding: 2rem 2.4rem;}
+#hd_sch #sch_stx:focus{outline: none;box-shadow: none !important;border: none !important;}
+#hd_sch #sch_stx::placeholder{color: #fff;}
+#hd_sch #sch_submit {float:left;width:60px;border:0;background:var(--bg-color);color:#fff;border-radius:0 60px 60px 0;cursor:pointer;font-size:31px;padding-right: 2rem;}
 
 #hd_define {float:left;display: flex;align-items: center;}
 #hd_define:after {display:block;visibility:hidden;clear:both;content:""}
@@ -184,7 +192,8 @@ box-shadow:0 2px 5px rgba(0,0,0,0.2);padding: 5.4rem 6rem 7rem 6rem;}
 #gnb_all .gnb_al_li li a {color:#fff;font-size: 1.5rem;font-weight: 600;}
 #gnb_all_bg {display:none;background:rgba(0,0,0,0.4);width:100%;height:100%;position:fixed;left:0;top:0;z-index:999}
 body.expand #gnb_all{visibility: visible;overflow-x: hidden;left: 0;}
-body.expand #gnb_all_bg{display: block;}
+body.expand #gnb_all_bg,
+body.expand2 #gnb_all_bg{display: block;}
 .gnb_menu_close_btn{transition: 426ms cubic-bezier(0.25,0.46,0.45,0.94);float: right;}
 .gnb_menu_close_btn:hover{transform: rotate(180deg);}
 .gnb_menu_close_btn:hover svg path{stroke: var(--point-color);transition: 426ms cubic-bezier(0.25,0.46,0.45,0.94);}
