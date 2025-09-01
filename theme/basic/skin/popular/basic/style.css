@@ -18,3 +18,4 @@
 .popular_inner .popular_btns{display:none}
 .popular_btns .pp-next {position:absolute;top:68%;right:0px;width:18px;height:18px;line-height:15px;text-align:center;border:1px solid #53555a;margin-top:-12px;color:#d3d2d2}
 .popular_btns .pp-prev {position:absolute;top:68%;right:17px;width:18px;height:18px;line-height:15px;text-align:center;border:1px solid #53555a;margin-top:-12px;color:#d3d2d2}
+.recent_del{background: #F5F5F5;padding: .3rem;display: inline-flex;border-radius: 50%;margin-left: 1.1rem;border: none;}

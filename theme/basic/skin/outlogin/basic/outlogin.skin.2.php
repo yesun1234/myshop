@@ -6,7 +6,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">'
 ?>
 
 <!-- 로그인 후 아웃로그인 시작 { -->
-<section id="ol_after" class="ol">
+<!-- <section id="ol_after" class="ol">
     <header id="ol_after_hd">
         <h2>나의 회원정보</h2>
         <span class="profile_img">
@@ -39,7 +39,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">'
     <footer>
     	<a href="<?php echo G5_BBS_URL ?>/logout.php" id="ol_after_logout"><i class="fa fa-sign-out" aria-hidden="true"></i> 로그아웃</a>
     </footer>
-</section>
+</section> -->
 
 <script>
 // 탈퇴의 경우 아래 코드를 연동하시면 됩니다.

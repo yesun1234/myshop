@@ -293,71 +293,26 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
     </div>
 
 
-    <nav id="gnb">
-        <h2>메인메뉴</h2>
-        <div class="gnb_wrap">
-            <ul id="gnb_1dul">
-                
-                <?php
-				$menu_datas = get_menu_db(0, true);
-				$gnb_zindex = 999; // gnb_1dli z-index 값 설정용
-                $i = 0;
-                foreach( $menu_datas as $row ){
-                    if( empty($row) ) continue;
-                    $add_class = (isset($row['sub']) && $row['sub']) ? 'gnb_al_li_plus' : '';
-                ?>
-                <li class="gnb_1dli <?php echo $add_class; ?>" style="z-index:<?php echo $gnb_zindex--; ?>">
-                    <a href="<?php echo $row['me_link']; ?>" target="_<?php echo $row['me_target']; ?>" class="gnb_1da"><?php echo $row['me_name'] ?></a>
-                    <?php
-                    $k = 0;
-                    foreach( (array) $row['sub'] as $row2 ){
-
-                        if( empty($row2) ) continue; 
-
-                        if($k == 0)
-                            echo '<span class="bg">하위분류</span><div class="gnb_2dul"><ul class="gnb_2dul_box">'.PHP_EOL;
-                    ?>
-                        <li class="gnb_2dli"><a href="<?php echo $row2['me_link']; ?>" target="_<?php echo $row2['me_target']; ?>" class="gnb_2da"><?php echo $row2['me_name'] ?></a></li>
-                    <?php
-                    $k++;
-                    }   //end foreach $row2
-
-                    if($k > 0)
-                        echo '</ul></div>'.PHP_EOL;
-                    ?>
-                </li>
-                <?php
-                $i++;
-                }   //end foreach $row
-
-                if ($i == 0) {  ?>
-                    <li class="gnb_empty">메뉴 준비 중입니다.<?php if ($is_admin) { ?> <a href="<?php echo G5_ADMIN_URL; ?>/menu_list.php">관리자모드 &gt; 환경설정 &gt; 메뉴설정</a>에서 설정하실 수 있습니다.<?php } ?></li>
-                <?php } ?>
-            </ul>
-            
-            <div id="gnb_all_bg"></div>
-        </div>
-    </nav>
     <script>
-    $(function(){
-        $(".gnb_menu_btn").click(function(){
-            $("body").addClass('expand')
-        });
-        $(".gnb_menu_close_btn, #gnb_all_bg").click(function(){
-            $("body").removeClass('expand')
-        });
-        $(".gnb_1dli .bg").click(function(e){
-        e.preventDefault();
-        
-        let $li = $(this).closest(".gnb_1dli");
+        $(function(){
+            $(".gnb_menu_btn").click(function(){
+                $("body").addClass('expand')
+            });
+            $(".gnb_menu_close_btn, #gnb_all_bg").click(function(){
+                $("body").removeClass('expand')
+            });
+            $(".gnb_1dli .bg").click(function(e){
+            e.preventDefault();
+            
+            let $li = $(this).closest(".gnb_1dli");
 
-        if($li.hasClass("open")) {
-            $li.removeClass("open");
-        } else {
-            $(".gnb_1dli").removeClass("open");
-            $li.addClass("open");
-        }
-    });
+            if($li.hasClass("open")) {
+                $li.removeClass("open");
+            } else {
+                $(".gnb_1dli").removeClass("open");
+                $li.addClass("open");
+            }
+        });
     
         $('#hd_qnb .gnb_1dli').mouseenter(function() {
             $('#hd_qnb .gnb_1dli').removeClass('active');
@@ -369,26 +324,93 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
         });
 
         $("#searchIcon").click(function(e){
-        e.preventDefault();
-        $("body").toggleClass("expand2");
-        $(this).toggleClass("active");
-    });
+            e.preventDefault();
+            $("body").toggleClass("expand2");
+            $(this).toggleClass("active");
+        });
 
-    // 검색 닫기 버튼 클릭 시 닫힘
-    $(".seach_close_btn").click(function(e){
-        e.preventDefault();
-        $("body").removeClass("expand2");
-        $("#searchIcon").removeClass("active");
-    });
-
-    // body 아무 데나 클릭하면 닫힘 (단, 검색창/아이콘 제외)
-    $(document).click(function(e){
-        if (!$(e.target).closest('#searchIcon, .hd_sch_wr').length) {
+        // 검색 닫기 버튼 클릭 시 닫힘
+        $(".seach_close_btn").click(function(e){
+            e.preventDefault();
             $("body").removeClass("expand2");
             $("#searchIcon").removeClass("active");
+        });
+        list.addEventListener("click", function(e){
+            const btn = e.target.closest(".recent_del");
+            if(!btn) return;
+
+            // 이벤트 전파 막기
+            e.stopPropagation();
+
+            const li = btn.closest("li");
+            if(li) li.remove(); // 화면에서 즉시 제거
+
+            const key = btn.dataset.key;
+            keywords = keywords.filter(k => k !== key);
+            localStorage.setItem("recentSearch", JSON.stringify(keywords));
+        });
+
+
+        // body 아무 데나 클릭하면 닫힘 (단, 검색창/아이콘 제외)
+        $(document).click(function(e){
+            if (!$(e.target).closest('#searchIcon, .hd_sch_wr').length) {
+                $("body").removeClass("expand2");
+                $("#searchIcon").removeClass("active");
+                }
+        
+            });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+        // 검색 폼이 있을 때만 실행
+        const searchForm = document.querySelector('form[name="fsearchbox"], form[name="fsearch"]');
+        if (!searchForm) return;
+
+        console.log("[Head] search form detected");
+
+        // 검색 submit 이벤트
+        searchForm.addEventListener("submit", function(e) {
+            const input = searchForm.querySelector('input[name="stx"]');
+            if (!input) return;
+
+            const stx = input.value.trim();
+            console.log("[Head] submitted stx:", stx);
+
+            if (stx.length < 2) {
+                alert("검색어는 두 글자 이상 입력하세요.");
+                input.focus();
+                e.preventDefault();
+                return false;
+            }
+
+        if ((stx.match(/ /g) || []).length > 1) {
+            alert("검색어에 공백은 한 개만 입력 가능합니다.");
+            input.focus();
+            e.preventDefault();
+            return false;
         }
-    
+
+        // 최근검색어 저장
+        try {
+            let keywords = JSON.parse(localStorage.getItem("recentSearch")) || [];
+            console.log("[Head] localStorage before update:", keywords);
+
+            keywords = keywords.filter(word => word !== stx);
+            keywords.unshift(stx);
+            keywords = keywords.slice(0, 7);
+
+            localStorage.setItem("recentSearch", JSON.stringify(keywords));
+            console.log("[Head] updated recentSearch array:", keywords);
+        } catch(err) {
+            console.error("[Head] localStorage error:", err);
+        }
     });
+
+    
+
+    // 초기 렌더링
+    renderRecentSearches();
+
+    
     });
 
     </script>
